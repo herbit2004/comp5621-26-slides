@@ -4,6 +4,10 @@
 
 ## 打开与浏览
 
+在线浏览：[GitHub Pages 演示稿](https://herbit2004.github.io/comp5621-26-slides/)。无需下载仓库，打开链接即可使用翻页和演示模式。
+
+网站从 `main` 分支的根目录自动发布。成员修改合并并推送到 `main` 后，等待 GitHub Pages 部署完成，再刷新网页即可查看更新。根目录 `.nojekyll` 用于按原样发布 HTML 和素材，请保留。线上部署不需要执行 PDF 导出脚本。
+
 下载或克隆**完整仓库**，双击根目录 `index.html`，用桌面版 Chrome、Edge 或 Firefox 打开。无需启动服务器，无需先安装依赖。字体、图片和页面全部使用仓库内相对路径，离线可用。
 
 - 点击“演示模式”，用左右方向键或 Page Up / Page Down 翻页。
