@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Zhang Zhixiang 的演示页面</title></head><body>
+<!-- 在各个 template 内修改原题和讲解。增删整个 template 即增删页面。
+     图片使用 asset/文件名。公共排版、导航和页脚由根目录 index.html 提供。 -->
+<!-- 页面：3a-repeat；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3a-repeat" data-question="3a" data-owner="Zhang Zhixiang" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="3a">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(a) Non-persistent and persistent HTTP [8 points]</p>
+<div class="question-copy">
+<p class="source-question">A Web page contains one base HTML object and four referenced objects, all on the same server. The round-trip time (RTT) between the browser and server is 50 ms. The base HTML takes 10 ms to transmit, and each referenced object takes 5 ms. Ignore DNS, processing, and queueing delays, and assume that the browser does not open parallel TCP connections. With non-persistent HTTP, the five objects are fetched one at a time, each over a new TCP connection. With persistent HTTP, one TCP connection is reused. After receiving the base HTML, the browser sends the four GET requests back-to-back, and the server returns the four objects back-to-back. For both cases, compute the total time from the start of the first TCP connection setup until all five objects are received. Explain where persistent HTTP saves time and why this advantage grows when a page contains many small objects.</p></div></div>
+<div class="body-content">
+<div class="http-repeat-layout">
+<div class="reading-group" data-step="1">
+<div class="web-teaching">
+<div class="web-object">
+<img class="teaching-scene" src="asset/teaching-web-v2.png" alt="Browser laptop on the left and server on the right">
+<div class="web-endpoints"><span>Browser</span><span>Server</span></div></div>
+<div class="rtt-arrows"><span>Browser → server: request</span><span>Server → browser: reply</span><strong>One round trip (RTT) = 50 ms</strong></div></div>
+<p class="explain">RTT measures travel to the server and back, not one-way travel. In this problem, a new TCP connection first costs one setup RTT; the GET and start of its response cost another. Object transmission is added afterwards.</p></div>
+<div class="reading-group" data-step="2">
+<div class="fetch-stack">
+<p class="fetch-sequence-label">Read downward: each fetch starts after the previous object finishes.</p>
+<div class="fetch-cost"><strong>1. Base HTML</strong><span class="setup">TCP setup<br>50 ms</span><span class="request">GET / response<br>50 ms</span><span class="transfer">Transfer<br>10 ms</span></div>
+<div class="fetch-cost"><strong>2. Object O1</strong><span class="setup">TCP setup<br>50 ms</span><span class="request">GET / response<br>50 ms</span><span class="transfer">Transfer<br>5 ms</span></div>
+<div class="fetch-cost"><strong>3. Object O2</strong><span class="setup">TCP setup<br>50 ms</span><span class="request">GET / response<br>50 ms</span><span class="transfer">Transfer<br>5 ms</span></div>
+<div class="fetch-cost"><strong>4. Object O3</strong><span class="setup">TCP setup<br>50 ms</span><span class="request">GET / response<br>50 ms</span><span class="transfer">Transfer<br>5 ms</span></div>
+<div class="fetch-cost"><strong>5. Object O4</strong><span class="setup">TCP setup<br>50 ms</span><span class="request">GET / response<br>50 ms</span><span class="transfer">Transfer<br>5 ms</span></div></div></div>
+<div class="reading-group" data-step="3">
+<div class="eq">Five serial fetches: 5 × (2 × 50 ms) + 10 ms + 4 × 5 ms = <strong>530 ms</strong></div>
+<p class="explain">Non-persistent HTTP opens a new connection for every object. No parallel connections are allowed here, so none of these five waits can be hidden behind another fetch.</p></div></div></div>
+</template>
+<!-- 页面：3a-reuse；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3a-reuse" data-question="3a" data-owner="Zhang Zhixiang" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="3a">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(a) Non-persistent and persistent HTTP [8 points]</p>
+<div class="question-copy">
+<p class="source-question">A Web page contains one base HTML object and four referenced objects, all on the same server. The round-trip time (RTT) between the browser and server is 50 ms. The base HTML takes 10 ms to transmit, and each referenced object takes 5 ms. Ignore DNS, processing, and queueing delays, and assume that the browser does not open parallel TCP connections. With non-persistent HTTP, the five objects are fetched one at a time, each over a new TCP connection. With persistent HTTP, one TCP connection is reused. After receiving the base HTML, the browser sends the four GET requests back-to-back, and the server returns the four objects back-to-back. For both cases, compute the total time from the start of the first TCP connection setup until all five objects are received. Explain where persistent HTTP saves time and why this advantage grows when a page contains many small objects.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>Fetch base HTML</strong><span>Setup 50 + request 50 + transfer 10 = 110 ms</span></div>
+<div class="relation"><span>HTML reveals four object URLs</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><strong>Four back-to-back GETs</strong><span>Reuse the existing TCP connection</span></div>
+<div class="relation"><span>one shared request RTT: 50 ms</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><strong>Four object responses</strong><span>Transfer 4 × 5 = 20 ms</span></div></div>
+<div class="reuse-strip"><span class="setup">50 ms setup</span><span class="request">50 ms base request</span><span class="transfer">10 ms HTML</span><span class="request">50 ms shared request wait</span><span class="transfer">20 ms objects</span></div></div>
+<div class="reading-group" data-step="2">
+<div class="eq">110 ms + 50 ms + 20 ms = <strong>180 ms</strong></div></div>
+<div class="reading-group" data-step="3">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><span>Saved connection setups</span></h2>
+<div class="saved-icons">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg></div>
+<div class="eq">4 × 50 ms = <strong>200 ms</strong></div>
+<p class="explain">One connection replaces five, removing four setups.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>Saved serial request waits</span></h2>
+<div class="saved-icons">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg></div>
+<div class="eq">3 × 50 ms = <strong>150 ms</strong></div>
+<p class="explain">Four requests share one wait instead of four separate waits.</p></section></div></div>
+<div class="reading-group" data-step="4">
+<p class="answer-line">530 − 180 = 350 ms saved. For small objects, RTT waits dominate their short transmission times.</p>
+<p class="explain">Phase order only, not to scale. The 180 ms assumes back-to-back GETs; reuse alone does not guarantee it.</p></div></div>
+</template>
+<!-- 页面：3b；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3b" data-question="3b" data-owner="Zhang Zhixiang" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="3b">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(b) Web caching [8 points]</p>
+<div class="question-copy">
+<p class="source-question">An institutional network connects to the Internet through a 10 Mbps access link. Its browsers generate an average of 25 Web-object requests per second, and the average object size is 200 Kbits. Assume that the local LAN is not a bottleneck. (i) Without a Web cache, compute the average data rate on the access link and its utilization. (ii) A local Web cache is installed with a hit rate of 0.40. Cache hits are served locally and do not use the access link. Compute the new average access-link data rate and utilization. (iii) If the average response time is 10 ms for a hit and 500 ms for a miss, compute the average response time seen by a user. State two performance benefits of Web caching.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="cache-request-group">
+<div><b>4 of 10 representative requests: hits</b>
+<div><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>hit</b></span><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>hit</b></span><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>hit</b></span><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>hit</b></span></div></div>
+<div><b>6 of 10: misses</b>
+<div><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>miss</b></span><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>miss</b></span><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>miss</b></span><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>miss</b></span><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>miss</b></span><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>miss</b></span></div></div></div>
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>Browser</strong><span>25 requests/s</span></div>
+<div class="relation cache-return"><span>request →</span><span>← returned object<br>hit or miss</span></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><strong>Local cache</strong><span>Return the object to the browser<br>Local hit: 10 ms; miss: 500 ms</span></div>
+<div class="relation cache-return"><span>miss request →</span><span>← object response<br>60% use the 10 Mbps link</span></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><strong>Origin server</strong><span>Object: 200 Kbit<br>Miss response: 500 ms</span></div></div></div>
+<div class="reading-group" data-step="2">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>Traffic that crosses the access link</span></h2>
+<div class="eq">No cache: 25 × 200 Kbit = <strong>5 Mbps</strong><br>Utilization: 5 / 10 = <strong>50%</strong><br>With cache: 0.60 × 5 = <strong>3 Mbps</strong><br>Utilization: 3 / 10 = <strong>30%</strong></div></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><span>Weight the two response paths</span></h2>
+<div class="eq">0.40 × 10 ms + 0.60 × 500 ms<br>= <strong>304 ms</strong></div>
+<p class="explain">Hits are 40%, not half the requests. A simple average of 10 and 500 ms would give the wrong weighting.</p></section></div></div>
+<div class="reading-group" data-step="3">
+<p class="answer-line">Local hits return faster; fewer misses reduce upstream traffic and congestion.</p>
+<p class="explain">Ten tokens show the 40/60 proportion, not ten measured requests. Miss time is the given 500 ms; no extra queueing term is added.</p></div></div>
+</template>
+<!-- 页面：3c-fields；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3c-fields" data-question="3c" data-owner="Zhang Zhixiang" data-source="Homework 1, consensus, RFC 9113 §§1 and 8.2.2">
+<div class="original-text" data-original-question="3c">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(c) HTTP/1.1 and HTTP/2: response semantics and object delivery [10 points]</p>
+<div class="question-copy">
+<p class="source-question">A server returns the following HTTP/1.1 response for the base HTML object of a Web page:</p>
+<p class="source-question">(i) State the meaning of the status line and the roles of Content-Type, Last-Modified, Set-Cookie, and Connection: keep-alive.</p>
+<p class="source-question">(ii) If the same Web interaction uses HTTP/2 instead of HTTP/1.1, which application-level semantics above remain essentially unchanged? Explain what changes in the delivery of multiple requested objects.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="header-reading">
+<div class="wire-response">
+<div><b class="letter">A</b><code>HTTP/1.1 200 OK</code></div>
+<div><b class="letter">B</b><code>Content-Type: text/html</code></div>
+<div class="source-response-length">Content-Length: 12000</div>
+<div><b class="letter">C</b><code>Last-Modified: Tue, 08 Sep 2026 10:00:00 GMT</code></div>
+<div><b class="letter">D</b><code>Set-Cookie: session_id=12345</code></div>
+<div><b class="letter">E</b><code>Connection: keep-alive</code></div>
+<div class="response-body">Blank line, then the HTML body</div></div>
+<div class="header-meanings">
+<div><b class="letter">A</b>
+<p>Request succeeded; this is the response status.</p></div>
+<div><b class="letter">B</b>
+<p>The response body is HTML, not an image or video.</p></div>
+<div><b class="letter">C</b>
+<p>Modification time supports later cache validation.</p></div>
+<div><b class="letter">D</b>
+<p>Browser stores a session cookie for later matching requests.</p></div>
+<div><b class="letter">E</b>
+<p>Keep this HTTP/1.1 TCP connection available for reuse.</p></div></div></div></div>
+<div class="reading-group" data-step="2">
+<p class="explain">This is a response, so Set-Cookie asks the browser to store a value. A later matching request sends the cookie back; it is not the HTML content itself.</p>
+<p class="answer-line">HTTP/2 keeps status, content metadata, cache and cookie meanings. It changes their framing and delivery. Connection: keep-alive is excluded from HTTP/2.</p></div></div>
+</template>
+<!-- 页面：3c-streams；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3c-streams" data-question="3c" data-owner="Zhang Zhixiang" data-source="Homework 1, consensus, RFC 9113 §§1 and 8.2.2">
+<div class="original-text" data-original-question="3c">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(c) HTTP/1.1 and HTTP/2: response semantics and object delivery [10 points]</p>
+<div class="question-copy">
+<p class="source-question">(iii) The browser requests one large object O1 followed by three small objects O2, O3, and O4 over one connection. With HTTP/1.1, assume that the requests are pipelined but the server sends complete responses in first-come-first-served (FCFS) order. Explain why O2-O4 may wait behind O1. Then explain how HTTP/2 framing, interleaving, and client-specified priority can reduce this waiting.</p>
+<p class="source-question">(iv) Suppose a TCP segment carrying part of O1 is lost. Does HTTP/2 completely remove head-of-line blocking? Explain what can still happen to the other streams that share the same TCP connection.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>HTTP/1.1 pipelined FCFS</span></h2>
+<div class="stream-strip"><span class="stream-frame o1" style="flex:6">O1</span><span class="stream-frame o2" style="flex:1">O2</span><span class="stream-frame o3" style="flex:1">O3</span><span class="stream-frame o4" style="flex:1">O4</span></div>
+<p class="explain">Complete O1 first, then O2–O4. The small objects cannot overtake the large response under the stated ordering.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>HTTP/2 multiplexed streams</span></h2>
+<div class="stream-strip"><span class="stream-frame o1" style="flex:1">O1</span><span class="stream-frame o2" style="flex:1">O2</span><span class="stream-frame o1" style="flex:1">O1</span><span class="stream-frame o3" style="flex:1">O3</span><span class="stream-frame o1" style="flex:1">O1</span><span class="stream-frame o4" style="flex:1">O4</span><span class="stream-frame o1" style="flex:1">O1</span><span class="stream-frame o1" style="flex:1">O1</span><span class="stream-frame o1" style="flex:1">O1</span></div>
+<p class="explain">Split responses into frames with stream IDs. Interleaving lets small objects finish before O1; client priority can guide server scheduling.</p></section></div>
+<p class="explain">Object colors match across both strips. The strips illustrate ordering, not measured transmission time.</p></div>
+<div class="reading-group" data-step="2">
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>All those streams still share one ordered TCP byte sequence</span></h2>
+<div class="tcp-loss"><span>Earlier bytes<br>delivered</span><span class="missing">Lost segment<br>contains O1 bytes</span><span class="blocked">Later O2 bytes</span><span class="blocked">Later O3 bytes</span><span class="blocked">Later O1 bytes</span></div>
+<div class="causal-flow">
+<div class="object violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><strong>One segment lost</strong><span>A gap appears in TCP bytes</span></div>
+<div class="relation"><span>TCP waits for recovery</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><strong>Later bytes withheld</strong><span>Even if already received</span></div>
+<div class="relation"><span>shared connection stalls</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><strong>Multiple streams delayed</strong><span>TCP head-of-line blocking</span></div></div></div>
+<div class="reading-group" data-step="3">
+<p class="answer-line">HTTP/2 removes whole-response serialization, but does not fully remove TCP-level head-of-line blocking.</p></div></div>
+</template>
+<!-- 页面：3d；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3d" data-question="3d" data-owner="Zhang Zhixiang" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="3d">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(d) DNS and email [6 points]</p>
+<div class="question-copy">
+<p class="source-question">A student visits https://mail.example.edu in a browser, sends a message to bob@remote.edu, and later reads and organizes the same mailbox using a native mail application. Explain the roles of DNS, HTTP, SMTP, and IMAP in this scenario. Which DNS resource-record type helps the sender's mail server locate the mail server for remote.edu? State one benefit and one possible drawback of DNS caching.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>Browser</strong><span>Webmail interface</span></div>
+<div class="relation"><span>HTTPS: user clicks Send</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><strong>Student’s mail system</strong><span>Accepts the message</span></div>
+<div class="relation"><span>SMTP: transfers the message</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><strong>Recipient mail server</strong><span>For bob@remote.edu</span></div></div>
+<p class="mailbox-link">Webmail and the native app access the student’s own mailbox in the same mail system.</p>
+<div class="dns-branches">
+<div>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><b>DNS for the browser</b><span>Resolve mail.example.edu to reach Webmail.</span></div>
+<div>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><b>DNS for the sender mail server</b><span>Look up remote.edu’s MX record to find its mail exchanger.</span></div></div></div>
+<div class="reading-group" data-step="2">
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>Native mail app</strong><span>Reads and organizes the same mailbox</span></div>
+<div class="relation"><span>IMAP: synchronize messages and folders</span><b aria-hidden="true">↔</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><strong>Student’s own mailbox</strong><span>Same account used by Webmail<br>Messages and folder state</span></div></div></div>
+<div class="reading-group" data-step="3">
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><span>DNS caching: reuse answers until expiry</span></h2>
+<div class="dns-time">
+<div><b>First lookup</b><span>Query DNS; cache answer</span></div>
+<div><b>Within TTL</b><span>Reuse locally: faster, fewer queries</span></div>
+<div><b>Record changes before TTL expires</b><span>Cached old answer can remain stale</span></div></div>
+<p class="explain">The browser does not directly deliver SMTP mail to the recipient. DNS locates services; it does not carry the email body.</p></div></div>
+</template>
+
+<!-- 本地文件加载桥接：请保留此段。它让双击首页也能读取成员页面，无需服务器。 -->
+<script>
+parent.postMessage({type:'comp5621-pages', html:[...document.querySelectorAll('template')].map(t=>t.outerHTML).join('')}, '*');
+</script>
+</body></html>

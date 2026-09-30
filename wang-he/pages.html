@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Wang He 的演示页面</title></head><body>
+<!-- 在各个 template 内修改原题和讲解。增删整个 template 即增删页面。
+     图片使用 asset/文件名。公共排版、导航和页脚由根目录 index.html 提供。 -->
+<!-- 页面：3e-hkust；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3e-hkust" data-question="3e" data-owner="Wang He" data-source="Wang He direct capture screenshots; original pcap verified">
+<div class="original-text" data-original-question="3e">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(e) Wireshark: HTTP version [8 points]</p>
+<div class="question-copy">
+<p class="source-question">Using Wireshark, capture traffic while visiting www.ust.hk and www.cse.ust.hk. Determine the HTTP version used to retrieve the main page of each site. For each site, include one screenshot and state the evidence in the capture that supports your answer. If the site redirects, identify the final hostname and examine the connection that serves the main page. Report the version observed in your capture; the two sites may use different HTTP versions.</p></div></div>
+<div class="body-content">
+<div class="evidence-stage">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="natural-capture-shadow"><feComponentTransfer><feFuncA type="gamma" amplitude="1" exponent="1.35" offset="0"/></feComponentTransfer></filter></defs></svg><a class="whole-capture" href="asset/Wang_HKUST_Wireshark.png" target="_blank">
+<img src="asset/Wang_HKUST_Wireshark.png" alt="Full original Wang He HKUST main site capture"></a>
+<svg class="evidence-leaders" viewBox="0 0 1690 750" aria-hidden="true"><path d="M1178 95 H1150 V123.83999999999999 H1087"/><circle cx="1087" cy="123.83999999999999" r="5"/><path d="M1178 273 H1170 V150.48 H1087"/><circle cx="1087" cy="150.48" r="5"/></svg><span class="row-marker" style="top:114.83999999999999px">A</span>
+<div class="evidence-note" style="top:42px">
+<h2><b class="letter">A</b>Frame 48: Final hostname</h2>
+<p>This Client Hello row says <strong>SNI=hkust.edu.hk</strong>. It identifies the hostname used by this connection.</p></div><span class="row-marker" style="top:141.48px">B</span>
+<div class="evidence-note" style="top:220px">
+<h2><b class="letter">B</b>Frame 60: Actual page request</h2>
+<p>The selected row is <strong>HTTP2 HEADERS[1]: GET /?hw1_direct=20260920b</strong>. Wireshark decoded the actual request as HTTP/2.</p></div>
+<div class="capture-detail">
+<div class="capture-detail-title">Magnified Info column · same screenshot and rows</div>
+<div class="capture-detail-window">
+<img src="asset/Wang_HKUST_Wireshark.png" alt="Unchanged Info column enlarged from the full capture"><b class="detail-row-label" style="top:29px">A · 48</b><b class="detail-row-label" style="top:88px">B · 60</b></div></div>
+<p class="evidence-bottom">Client 172.20.10.3 → server 143.89.209.9. Full original screenshot; click to inspect.</p></div>
+<p class="answer-line">www.ust.hk redirects to hkust.edu.hk. A identifies the final host; B establishes observed HTTP/2 on the page request.</p></div>
+</template>
+<!-- 页面：3e-cse；正文保持英文，原题位于页面顶部。 -->
+<template data-key="3e-cse" data-question="3e" data-owner="Wang He" data-source="Wang He direct capture screenshots; original pcap verified">
+<div class="original-text" data-original-question="3e">
+<p class="source-major-heading">Problem 3. HTTP and Related Application-Layer Protocols (40 points)</p>
+<p class="source-heading">(e) Wireshark: HTTP version [8 points]</p>
+<div class="question-copy">
+<p class="source-question">Using Wireshark, capture traffic while visiting www.ust.hk and www.cse.ust.hk. Determine the HTTP version used to retrieve the main page of each site. For each site, include one screenshot and state the evidence in the capture that supports your answer. If the site redirects, identify the final hostname and examine the connection that serves the main page. Report the version observed in your capture; the two sites may use different HTTP versions.</p></div></div>
+<div class="body-content">
+<div class="evidence-stage">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="natural-capture-shadow"><feComponentTransfer><feFuncA type="gamma" amplitude="1" exponent="1.35" offset="0"/></feComponentTransfer></filter></defs></svg><a class="whole-capture" href="asset/Wang_CSE_Wireshark.png" target="_blank">
+<img src="asset/Wang_CSE_Wireshark.png" alt="Full original Wang He HKUST CSE capture"></a>
+<svg class="evidence-leaders" viewBox="0 0 1690 750" aria-hidden="true"><path d="M1178 95 H1150 V123.83999999999999 H1087"/><circle cx="1087" cy="123.83999999999999" r="5"/><path d="M1178 273 H1170 V150.48 H1087"/><circle cx="1087" cy="150.48" r="5"/><path d="M1178 451 H1160 V163.44 H1087"/><circle cx="1087" cy="163.44" r="5"/></svg><span class="row-marker" style="top:114.83999999999999px">A</span>
+<div class="evidence-note" style="top:42px">
+<h2><b class="letter">A</b>Frame 24: Final hostname</h2>
+<p>SNI in this row is <strong>cse.hkust.edu.hk</strong>.</p></div><span class="row-marker" style="top:141.48px">B</span>
+<div class="evidence-note" style="top:220px">
+<h2><b class="letter">B</b>Frame 36: Actual request version</h2>
+<p>The selected request explicitly reads <strong>GET /?hw1_direct=20260920b HTTP/1.1</strong>.</p></div><span class="row-marker" style="top:154.44px">C</span>
+<div class="evidence-note" style="top:398px">
+<h2><b class="letter">C</b>Frame 101: HTML response</h2>
+<p>Info reports <strong>HTTP/1.1 200 OK (text/html)</strong>. This is the successful HTML response, not just a handshake.</p></div>
+<div class="capture-detail">
+<div class="capture-detail-title">Magnified Info column · same screenshot and rows</div>
+<div class="capture-detail-window">
+<img src="asset/Wang_CSE_Wireshark.png" alt="Unchanged Info column enlarged from the full capture"><b class="detail-row-label" style="top:29px">A · 24</b><b class="detail-row-label" style="top:88px">B · 36</b><b class="detail-row-label" style="top:116px">C · 101</b></div></div>
+<p class="evidence-bottom">Client 172.20.10.3 → server 143.89.40.4. Protocol candidates in Client Hello alone do not prove the selected version.</p></div>
+<p class="answer-line">www.cse.ust.hk redirects to cse.hkust.edu.hk. A names the host; B proves HTTP/1.1; C supports the page-response interpretation.</p></div>
+</template>
+<!-- 页面：4a；正文保持英文，原题位于页面顶部。 -->
+<template data-key="4a" data-question="4a" data-owner="Wang He" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="4a">
+<p class="source-major-heading">Problem 4. Adaptive Video Streaming with DASH (10 points)</p>
+<p class="source-heading">(a) Adaptive rate selection [4 points]</p>
+<div class="question-copy">
+<p class="source-context">A DASH server stores each 4-second video chunk at three encoding rates: 1 Mbps, 2 Mbps, and 4 Mbps. Before each download, the client estimates the sustainable server-to-client bandwidth. For three consecutive chunks, the estimates are 5 Mbps, 3 Mbps, and 1.5 Mbps. Assume the client chooses the highest available encoding rate that does not exceed the estimate, the actual download throughput equals the estimate, and protocol overhead is negligible.</p>
+<p class="source-question">For each of the three chunks, choose the encoding rate and compute the chunk download time.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<p class="explain">Encoding rate measures video data per second of playback. Throughput measures data delivered per second of downloading. First select an available encoding, then compute size and download time.</p></div>
+<div class="reading-group" data-step="2">
+<div class="chunk-work-grid">
+<section class="chunk-work">
+<h2>Chunk 1</h2>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>5 Mbps throughput</span></h2>
+<p class="encoding-choice">Available: <span class="">1</span><span class="">2</span><span class="chosen">4</span> Mbps</p>
+<p class="calculation-reason">Choose highest ≤ 5 Mbps</p>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="video"><rect x="6" y="11" width="52" height="42" rx="4"/><path d="m26 22 16 10-16 10z"/></svg><span>4 Mbps encoding</span></h2>
+<p class="calculation-reason">Multiply by 4 s of video</p>
+<div class="eq">4 Mbps × 4 s = <b>16 Mbit</b></div>
+<p class="calculation-reason">Divide by network throughput</p>
+<div class="eq">16 Mbit / 5 Mbps<br>= <strong>3.20 s</strong></div></section>
+<section class="chunk-work">
+<h2>Chunk 2</h2>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>3 Mbps throughput</span></h2>
+<p class="encoding-choice">Available: <span class="">1</span><span class="chosen">2</span><span class="">4</span> Mbps</p>
+<p class="calculation-reason">Choose highest ≤ 3 Mbps</p>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="video"><rect x="6" y="11" width="52" height="42" rx="4"/><path d="m26 22 16 10-16 10z"/></svg><span>2 Mbps encoding</span></h2>
+<p class="calculation-reason">Multiply by 4 s of video</p>
+<div class="eq">2 Mbps × 4 s = <b>8 Mbit</b></div>
+<p class="calculation-reason">Divide by network throughput</p>
+<div class="eq">8 Mbit / 3 Mbps<br>= <strong>2.67 s</strong></div></section>
+<section class="chunk-work">
+<h2>Chunk 3</h2>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>1.5 Mbps throughput</span></h2>
+<p class="encoding-choice">Available: <span class="chosen">1</span><span class="">2</span><span class="">4</span> Mbps</p>
+<p class="calculation-reason">Choose highest ≤ 1.5 Mbps</p>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="video"><rect x="6" y="11" width="52" height="42" rx="4"/><path d="m26 22 16 10-16 10z"/></svg><span>1 Mbps encoding</span></h2>
+<p class="calculation-reason">Multiply by 4 s of video</p>
+<div class="eq">1 Mbps × 4 s = <b>4 Mbit</b></div>
+<p class="calculation-reason">Divide by network throughput</p>
+<div class="eq">4 Mbit / 1.5 Mbps<br>= <strong>2.67 s</strong></div></section></div></div>
+<div class="reading-group" data-step="3">
+<p class="answer-line">All downloads finish within 4 s of playback. At 3 Mbps choose 2, not 3: only 1, 2 and 4 Mbps encodings exist.</p></div></div>
+</template>
+<!-- 页面：4b；正文保持英文，原题位于页面顶部。 -->
+<template data-key="4b" data-question="4b" data-owner="Wang He" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="4b">
+<p class="source-major-heading">Problem 4. Adaptive Video Streaming with DASH (10 points)</p>
+<p class="source-heading">(b) Why rate adaptation matters [3 points]</p>
+<div class="question-copy">
+<p class="source-question">Suppose the client always selects the 4 Mbps representation. Compute the download time during the 3 Mbps and 1.5 Mbps bandwidth periods. Explain why repeated downloads that take longer than the 4-second playback duration can cause playback stalls and why DASH changes the encoding rate.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<p class="explain">Keeping 4 Mbps encoding fixes every 4 s chunk at 16 Mbit. Playback continues while a chunk downloads; the buffer must cover the difference.</p>
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>3 Mbps network</span></h2>
+<div class="eq">16 Mbit / 3 Mbps ≈ <strong>5.33 s</strong></div>
+<div class="buffer-budget">
+<div>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><b>5.33 s</b><span>playback consumes during download</span></div>
+<div>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="video"><rect x="6" y="11" width="52" height="42" rx="4"/><path d="m26 22 16 10-16 10z"/></svg><b>4.00 s</b><span>new playable video arrives</span></div></div>
+<div class="eq">Buffer change = 4 − 5.33 = <strong>−1.33 s/chunk</strong></div></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>1.5 Mbps network</span></h2>
+<div class="eq">16 Mbit / 1.5 Mbps ≈ <strong>10.67 s</strong></div>
+<div class="buffer-budget">
+<div>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><b>10.67 s</b><span>playback consumes during download</span></div>
+<div>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="video"><rect x="6" y="11" width="52" height="42" rx="4"/><path d="m26 22 16 10-16 10z"/></svg><b>4.00 s</b><span>new playable video arrives</span></div></div>
+<div class="eq">Buffer change = 4 − 10.67 = <strong>−6.67 s/chunk</strong></div></section></div></div>
+<div class="reading-group" data-step="2">
+<div class="deficit-sequence"><b>Repeated slow chunks</b><span>B₀</span><span>B₀ − Δ</span><span>B₀ − 2Δ</span><span>B₀ − 3Δ</span><strong>Eventually no playable reserve</strong></div>
+<p class="explain">B₀ is an unspecified initial reserve. Δ = 1.33 s or 6.67 s here, assuming uninterrupted playback and sequential downloads. Once reserve is exhausted, playback stalls; one slow chunk need not stall immediately.</p></div>
+<div class="reading-group" data-step="3">
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><strong>Falling reserve</strong><span>Downloads keep taking too long</span></div>
+<div class="relation"><span>adapt before exhaustion</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="video"><rect x="6" y="11" width="52" height="42" rx="4"/><path d="m26 22 16 10-16 10z"/></svg><strong>Lower encoding</strong><span>Fewer bits in the next chunk</span></div>
+<div class="relation"><span>same network, smaller transfer</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><strong>Shorter download</strong><span>Helps keep pace with playback</span></div></div></div></div>
+</template>
+<!-- 页面：4c；正文保持英文，原题位于页面顶部。 -->
+<template data-key="4c" data-question="4c" data-owner="Wang He" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="4c">
+<p class="source-major-heading">Problem 4. Adaptive Video Streaming with DASH (10 points)</p>
+<p class="source-heading">(c) Buffering and CDN [3 points]</p>
+<div class="question-copy">
+<p class="source-question">Explain how a client-side playout buffer helps when network delay or throughput varies. State one reason why a nearby CDN node can improve streaming performance.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="buffer-teaching">
+<div class="buffer-labels"><span><strong>Download</strong><br>Network delivers chunks</span><span><strong>Buffer</strong><br>Already downloaded video</span><span><strong>Playback</strong><br>Consumes stored video</span></div>
+<div class="buffer-object">
+<img class="teaching-scene" src="asset/teaching-buffer-v2.png" alt="Downloaded video tiles enter a tray representing player memory and are consumed by playback">
+<svg class="buffer-directions" viewBox="0 0 1000 255" aria-label="Downloads fill the buffer; playback drains it"><defs><marker id="buffer-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#326675"/></marker></defs><path d="M320 144H380 M650 144H700" marker-end="url(#buffer-arrow)"/><text x="350" y="126">store</text><text x="675" y="126">play</text></svg></div>
+<p class="scene-caption">Storage metaphor: the buffer is memory in the player, not a physical box on the network.</p></div></div>
+<div class="reading-group" data-step="2">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><span>Temporary variation</span></h2>
+<div class="reserve-event"><span>Network briefly slows</span><b>Buffer supplies already downloaded chunks</b><span>Network recovers and replenishes reserve</span></div>
+<p class="explain">The buffer absorbs short-term timing variation. If delivery stays below consumption, the reserve still drains and eventually playback stalls.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="server"><rect x="15" y="6" width="34" height="52" rx="3"/><path d="M15 23h34M15 40h34M23 15h1m7 0h10M23 32h1m7 0h10M23 49h1m7 0h10"/></svg><span>A nearby CDN may improve the path</span></h2>
+<div class="cdn-path"><b>Distant origin</b><span>longer / possibly congested route</span>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg></div>
+<div class="cdn-path nearby"><b>Nearby CDN</b><span>shorter / possibly less congested route</span>
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg></div>
+<p class="explain">A shorter or less congested route can reduce RTT and improve chunk delivery. Proximity is a potential improvement, not a guarantee of capacity.</p></section></div></div>
+<div class="reading-group" data-step="3">
+<p class="answer-line">Buffering handles brief variation; CDN placement can improve delivery. Neither cures an indefinitely sustained rate deficit.</p></div></div>
+</template>
+
+<!-- 本地文件加载桥接：请保留此段。它让双击首页也能读取成员页面，无需服务器。 -->
+<script>
+parent.postMessage({type:'comp5621-pages', html:[...document.querySelectorAll('template')].map(t=>t.outerHTML).join('')}, '*');
+</script>
+</body></html>

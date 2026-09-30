@@ -1,0 +1,9 @@
+# 此文件是中文依赖说明，不是 Python / pip 安装清单。
+# 浏览演示：桌面版 Chrome、Edge 或 Firefox；无需安装其他依赖。
+# 导出 PDF：Node.js 20 或更高版本、Playwright 1.62.1、Playwright Chromium。
+# Node 依赖的可安装清单见 package.json。
+# 在仓库根目录运行：
+# npm install
+# npx playwright install chromium
+# npm run build
+# 所有字体和图片已随仓库保存，无需联网浏览；首次安装导出依赖需要联网。

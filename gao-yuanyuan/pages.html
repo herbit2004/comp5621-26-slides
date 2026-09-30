@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Gao Yuanyuan 的演示页面</title></head><body>
+<!-- 在各个 template 内修改原题和讲解。增删整个 template 即增删页面。
+     图片使用 asset/文件名。公共排版、导航和页脚由根目录 index.html 提供。 -->
+<!-- 页面：2a-queue；正文保持英文，原题位于页面顶部。 -->
+<template data-key="2a-queue" data-question="2a" data-owner="Gao Yuanyuan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="2a">
+<p class="source-major-heading">Problem 2. Packet Delay and Queueing (20 points)</p>
+<p class="source-heading">(a) Delay at a busy output link [8 points]</p>
+<div class="question-copy">
+<p class="source-context">All packets in this problem are 1,500 bytes long. Router R forwards packets to next hop B over a 6 Mbps FIFO output link. The link is 900 km long, the propagation speed is 2 x 10^8 m/s, and R takes 0.20 ms to process an arriving packet before it joins the output queue.</p>
+<p class="source-question">Packet P arrives at R and begins its 0.20 ms processing. When processing finishes, the output link is already transmitting a packet with 4,500 bits remaining, and three full packets are waiting ahead of P. Assume that no new arrivals affect P before it is transmitted. Compute P's queueing delay, transmission delay, propagation delay on the R-B link, and the total time from P's arrival at R until B receives its last bit. State the factors that determine transmission delay and propagation delay.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="router-teaching">
+<img class="teaching-scene" src="asset/teaching-router-v2.png" alt="A router receives queued packets and forwards them through an output port">
+<div>
+<p><strong>At the router:</strong> process P (0.20 ms), then wait for earlier traffic to clear the output.</p>
+<p><strong>Only then:</strong> transmit P itself. FIFO means first-in, first-out.</p>
+<p class="scene-caption">Illustrated packets are symbolic; the exact queue is shown below.</p></div></div></div>
+<div class="reading-group" data-step="2">
+<div class="fifo-scene">
+<div><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P</b></span><b>Target, not yet in service</b></div>
+<div class="waiting-packets"><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>Q3</b></span><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>Q2</b></span><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>Q1</b></span><b>Three complete packets ahead</b></div>
+<div><span class="packet-token ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>4500 bits left</b></span><b>Earlier packet already in service</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="router"><rect x="6" y="18" width="52" height="32" rx="5"/><path d="M17 27h12m-4-4 4 4-4 4M47 41H35m4-4-4 4 4 4M13 56h38"/></svg><strong>Output</strong><span>6 Mbps</span></div></div></div>
+<div class="reading-group" data-step="3">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><span>Wait for earlier traffic</span></h2>
+<div class="eq">L = 1500 bytes × 8 = 12,000 bits<br>Queueing = (4500 + 3 × 12,000) bits / 6 Mbps<br>= 0.75 ms + 6.00 ms = <strong>6.75 ms</strong></div>
+<p class="explain">4500 bits are the remaining part of a packet, not another whole 1500-byte packet.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>Then send P</span></h2>
+<div class="eq">Transmission = 12,000 bits / 6 Mbps<br>= <strong>2.00 ms</strong></div>
+<p class="explain">P’s own 2 ms transmission is separate from queueing. FIFO prevents P from overtaking the packets already ahead.</p></section></div></div></div>
+</template>
+<!-- 页面：2a-travel；正文保持英文，原题位于页面顶部。 -->
+<template data-key="2a-travel" data-question="2a" data-owner="Gao Yuanyuan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="2a">
+<p class="source-major-heading">Problem 2. Packet Delay and Queueing (20 points)</p>
+<p class="source-heading">(a) Delay at a busy output link [8 points]</p>
+<div class="question-copy">
+<p class="source-question">Packet P arrives at R and begins its 0.20 ms processing. When processing finishes, the output link is already transmitting a packet with 4,500 bits remaining, and three full packets are waiting ahead of P. Assume that no new arrivals affect P before it is transmitted. Compute P's queueing delay, transmission delay, propagation delay on the R-B link, and the total time from P's arrival at R until B receives its last bit. State the factors that determine transmission delay and propagation delay.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>Transmission: push bits onto the link</span></h2>
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="router"><rect x="6" y="18" width="52" height="32" rx="5"/><path d="M17 27h12m-4-4 4 4-4 4M47 41H35m4-4-4 4 4 4M13 56h38"/></svg><strong>Sender</strong><span>Serialize P</span></div>
+<div class="relation"><span>6 Mbps</span><b aria-hidden="true">→</b></div>
+<div class="object violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><strong>P: 12,000 bits</strong><span>Last bit leaves after 2 ms</span></div></div>
+<div class="eq">L/R = 12,000 bits / 6 Mbps = <strong>2.00 ms</strong></div>
+<p class="explain">A longer packet takes longer to send. A faster link sends the same packet sooner.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><span>Propagation: travel through the medium</span></h2>
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="router"><rect x="6" y="18" width="52" height="32" rx="5"/><path d="M17 27h12m-4-4 4 4-4 4M47 41H35m4-4-4 4 4 4M13 56h38"/></svg><strong>R</strong><span>Start of link</span></div>
+<div class="relation"><span>900 km at 2 × 10⁸ m/s</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>B</strong><span>End of link</span></div></div>
+<div class="eq">d/s = 900,000 m / (2 × 10⁸ m/s)<br>= <strong>4.50 ms</strong></div>
+<p class="explain">Distance and signal speed determine travel time, regardless of packet length.</p></section></div></div>
+<div class="reading-group" data-step="2">
+<div class="bit-overlap">
+<div><b>First bit</b><span class="bit-send">sent</span><span class="bit-flight">travels: 4.5 ms</span><strong>arrives at 4.5 ms</strong></div>
+<div><b>Last bit</b><span class="last-offset">2 ms to leave</span><span class="bit-flight">travels: 4.5 ms</span><strong>arrives at 6.5 ms</strong></div></div>
+<p class="explain">Times above start when transmission starts. Earlier bits propagate while later bits are still being sent. To receive the entire packet, B must wait for the last bit.</p></div>
+<div class="reading-group" data-step="3">
+<p class="answer-line">Total: processing 0.20 + queueing 6.75 + transmission 2.00 + propagation 4.50 = 13.45 ms.</p></div></div>
+</template>
+<!-- 页面：2b；正文保持英文，原题位于页面顶部。 -->
+<template data-key="2b" data-question="2b" data-owner="Gao Yuanyuan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="2b">
+<p class="source-major-heading">Problem 2. Packet Delay and Queueing (20 points)</p>
+<p class="source-heading">(b) Traffic intensity and sustained congestion [6 points]</p>
+<div class="question-copy">
+<p class="source-question">Suppose packets arrive at the same output queue at a long-run average rate of 350 packets/s. Compute the link service capacity in packets/s and the traffic intensity ρ = La/R. The arrival rate then increases to 525 packets/s and remains at that rate. Recompute ρ. Explain what the two values of ρ imply for long-run queueing behavior, and state the largest long-run arrival rate for which ρ &lt; 1.</p></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><strong>One packet</strong><span>1500 bytes = 12,000 bits</span></div>
+<div class="relation"><span>divide link bits/s by bits/packet</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><strong>Service μ</strong><span>6 × 10⁶ / 12,000 = 500 packets/s</span></div></div></div>
+<div class="reading-group" data-step="2">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>350 packets/s: spare service</span></h2>
+<div class="eq">ρ = 350 / 500 = <strong>0.70</strong></div>
+<div class="load-steps">
+<div><strong>Second 1</strong><span>350 arrive</span><span>Up to 500 served</span><b>No cumulative deficit</b></div>
+<div><strong>Second 2</strong><span>350 arrive</span><span>Up to 500 served</span><b>No cumulative deficit</b></div>
+<div><strong>Second 3</strong><span>350 arrive</span><span>Up to 500 served</span><b>No cumulative deficit</b></div></div>
+<p class="explain">150 packets/s of average spare service can clear temporary bursts. This does not mean every packet avoids waiting.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><span>525 packets/s: growing backlog</span></h2>
+<div class="eq">ρ = 525 / 500 = <strong>1.05</strong></div>
+<div class="load-steps">
+<div><strong>Second 1</strong><span>525 arrive</span><span>Up to 500 served</span><b>25 remain</b></div>
+<div><strong>Second 2</strong><span>525 arrive</span><span>Up to 500 served</span><b>50 remain</b></div>
+<div><strong>Second 3</strong><span>525 arrive</span><span>Up to 500 served</span><b>75 remain</b></div></div>
+<p class="explain">25 packets/s accumulate. An infinite buffer grows without bound; a finite one eventually drops traffic.</p></section></div></div>
+<div class="reading-group" data-step="3">
+<p class="explain">The time steps illustrate sustained-rate accounting from no initial backlog; actual bursty arrivals need not occur evenly.</p>
+<p class="answer-line">ρ < 1 requires a < 500 packets/s. No attained real-valued maximum; if integer rates are required, 499 packets/s.</p></div></div>
+</template>
+<!-- 页面：2c；正文保持英文，原题位于页面顶部。 -->
+<template data-key="2c" data-question="2c" data-owner="Gao Yuanyuan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="2c">
+<p class="source-major-heading">Problem 2. Packet Delay and Queueing (20 points)</p>
+<p class="source-heading">(c) Traffic intensity and queueing delay [6 points]</p>
+<div class="question-copy">
+<div class="original-with-figure">
+<div>
+<p class="source-question">The plot below illustrates average queueing delay as the traffic intensity ρ = La/R increases. (i) Compare the operating conditions around ρ ≈ 0.5 and ρ ≈ 0.95. Why does queueing delay become much more sensitive to additional load as ρ approaches 1? (ii) If packet length L and link rate R remain unchanged, by what factor must the average packet arrival rate a increase to move the system from ρ = 0.5 to ρ = 0.95? (iii) Based on the plot, explain why operating a link continuously very close to ρ = 1 is undesirable even though the long-run offered rate has not yet exceeded the link capacity.</p></div>
+<img src="asset/original-queueing-plot.png" alt="Original question's queueing-delay plot"></div></div></div>
+<div class="body-content">
+<div class="reading-group" data-step="1">
+<div class="teaching-split">
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><span>At ρ ≈ 0.50</span></h2>
+<div class="margin-meter"><span style="width:50%">50% steady traffic</span><i style="width:50%"></i></div>
+<p><strong>50% spare capacity</strong> is available to drain an extra burst.</p>
+<div class="burst-drain"><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>extra burst</b></span><span class="drain-line fast"></span><b>Faster draining</b></div>
+<p class="explain">Half the service capacity remains after ongoing traffic. Accumulated packets clear relatively quickly.</p></section>
+<section>
+<h2 class="object-heading">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><span>At ρ ≈ 0.95</span></h2>
+<div class="margin-meter"><span style="width:95%">95% steady traffic</span><i style="width:5%"></i></div>
+<p><strong>5% spare capacity</strong> is available to drain an extra burst.</p>
+<div class="burst-drain"><span class="packet-token violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>same burst</b></span><span class="drain-line slow"></span><b>Slower draining</b></div>
+<p class="explain">Ongoing traffic leaves only 5% spare. A burst persists longer, increasing delay and making delay less predictable.</p></section></div></div>
+<div class="reading-group" data-step="2">
+<div class="eq">With L and R unchanged: a_new / a_old = 0.95 / 0.50 = <strong>1.9</strong>, a 90% arrival-rate increase.</div></div>
+<div class="reading-group" data-step="3">
+<div class="causal-flow">
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="buffer"><path d="M7 20v34h50V20M17 20V10h10v10M37 20V10h10v10"/><rect x="14" y="28" width="9" height="17"/><rect x="28" y="28" width="9" height="17"/><path d="M43 28h7v17h-7"/></svg><strong>Bursts linger</strong><span>Little spare service</span></div>
+<div class="relation"><span>packets wait longer</span><b aria-hidden="true">→</b></div>
+<div class="object ">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="clock"><circle cx="32" cy="32" r="24"/><path d="M32 16v17l12 8"/></svg><strong>Delay + jitter</strong><span>Timing becomes less predictable</span></div>
+<div class="relation"><span>if finite storage fills</span><b aria-hidden="true">→</b></div>
+<div class="object violet">
+<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><strong>Overflow / loss</strong><span>Can occur below mean capacity</span></div></div>
+<p class="explain">Drain lengths show a qualitative comparison, not measured time. A 1.9× arrival rate does not imply a 1.9× delay.</p></div></div>
+</template>
+
+<!-- 本地文件加载桥接：请保留此段。它让双击首页也能读取成员页面，无需服务器。 -->
+<script>
+parent.postMessage({type:'comp5621-pages', html:[...document.querySelectorAll('template')].map(t=>t.outerHTML).join('')}, '*');
+</script>
+</body></html>
