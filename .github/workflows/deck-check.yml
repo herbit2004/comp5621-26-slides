@@ -1,0 +1,31 @@
+name: Slides validation
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: slides-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  deck-check:
+    name: deck-check
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - name: 读取当前修改
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: 设置 Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: 安装固定版本依赖
+        run: npm ci
+      - name: 安装 Chromium 与系统依赖
+        run: npx playwright install --with-deps chromium
+      - name: 检查 HTML、资源、排版、导航和 PDF 编译
+        run: npm run check
