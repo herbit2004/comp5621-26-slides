@@ -263,10 +263,35 @@ header{align-items:center;padding-bottom:18px}
 .slide[data-key="3b"] .body-content{gap:14px}
 .slide[data-key="3b"] .reading-group:last-child>.explain{font-size:20px;line-height:1.35;margin:10px 0}
 
+/* Lin Fengyan 的内容安全区：横向各留 8%，纵向各留 7%。
+   参考线默认隐藏，只在编辑预览手动开启；演示与打印永不显示。 */
+:root{--lin-safe-x:8%;--lin-safe-y:7%}
+.slide[data-owner="Lin Fengyan"]:not(.title-slide) .page{padding:76px 154px 76px 42px}
+.slide[data-owner="Lin Fengyan"]:not(.title-slide) .body-content{gap:20px}
+.slide[data-key^="1a-"] .user-lane{margin:7px 0}
+.slide[data-key^="1a-"] .shared-link{margin:12px 0}
+.slide[data-key="1b-model"] .prob-bars{height:250px}
+.slide[data-key="1b-model"] .causal-flow{margin:0 0 12px}
+.slide[data-key="1b-admission"] h2{font-family:Inter,Arial,sans-serif;font-size:28px;margin:0 0 8px}
+.slide[data-key="1b-admission"] .math{margin:0}
+.slide[data-key="1b-admission"] .admission-table{margin:0}
+.slide[data-key="1b-capacity"] .capacity-working{margin-top:0}
+.slide[data-key^="1c-"] .body-content{gap:22px}
+.slide[data-key="1c-model"] .causal-flow{margin:0}
+.slide[data-key="1c-model"] .store-forward-path{width:min(100%,1260px);height:auto;object-fit:contain;display:block;margin:0 auto}
+.slide[data-key="1c-model"] .teaching-split{margin:0}
+.slide[data-key="1c-pipeline"] .teaching-split{margin:0}
+.slide[data-key="1c-time"] .timing{font-size:20px;table-layout:fixed}
+.slide[data-key="1c-time"] .timing th,.slide[data-key="1c-time"] .timing td{white-space:nowrap;padding:10px}
+body.show-guides .slide[data-owner="Lin Fengyan"]:not(.title-slide):after{content:'';position:absolute;inset:var(--lin-safe-y) var(--lin-safe-x);border:1px solid rgba(70,90,100,.6);z-index:30;pointer-events:none}
+.toolbar #guides[aria-pressed="true"]{font-weight:700;text-decoration:underline;text-underline-offset:4px}
+body.presenting .slide:after{display:none!important}
+@media print{.slide:after{display:none!important}}
+
 </style>
 </head><body>
 <!-- 浏览工具不属于幻灯片正文，也不会进入 PDF。 -->
-<div class="toolbar"><span>COMP5621 Homework 1</span><button id="previous">上一页</button><button id="next">下一页</button><span id="position">加载中</span><button id="presentation">演示模式</button><button onclick="window.print()">打印 / PDF</button></div>
+<div class="toolbar"><span>COMP5621 Homework 1</span><button id="previous">上一页</button><button id="next">下一页</button><span id="position">加载中</span><button id="guides" aria-pressed="false">参考线</button><button id="presentation">演示模式</button><button onclick="window.print()">打印 / PDF</button></div>
 <p id="loading">正在加载四位组员的本地页面…</p>
 <main id="deck"></main>
 <!-- 首页正文由这里维护；末页为 Wang He 的 4(c)，框架统一生成。 -->
@@ -367,6 +392,7 @@ function fit(){const scale=Math.min(1,(innerWidth-32)/1920);if(document.body.cla
 function show(){current();slides.forEach((s,i)=>s.classList.toggle('current-slide',i===index));pos.textContent=`${index+1} / ${slides.length}`;fit();}
 function go(n){index=Math.min(slides.length-1,Math.max(0,n));location.hash=`slide-${index+1}`;show();}
 document.getElementById('next').onclick=()=>go(index+1);document.getElementById('previous').onclick=()=>go(index-1);document.getElementById('presentation').onclick=()=>{document.body.classList.toggle('presenting');show()};
+const guides=document.getElementById('guides');guides.onclick=()=>{const active=document.body.classList.toggle('show-guides');guides.setAttribute('aria-pressed',String(active))};
 document.getElementById('deck').addEventListener('click',e=>{const a=e.target.closest('a[href^="#slide-"]');if(a){e.preventDefault();go(Number(a.getAttribute('href').slice(7))-1)}});
 addEventListener('hashchange',show);addEventListener('resize',fit);addEventListener('keydown',e=>{if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();go(index+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(index-1)}if(e.key==='Escape'){document.body.classList.remove('presenting');fit()}});show();})();
 

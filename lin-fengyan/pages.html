@@ -1,220 +1,162 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Lin Fengyan 的演示页面</title></head><body>
-<!-- 在各个 template 内修改原题和讲解。增删整个 template 即增删页面。
-     图片使用 asset/文件名。公共排版、导航和页脚由根目录 index.html 提供。 -->
-<!-- 页面：1a；正文保持英文，原题位于页面顶部。 -->
-<template data-key="1a" data-question="1a" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<!-- 每页只保留一个主要教学目标。根目录负责公共排版、导航、参考线和页脚。 -->
+
+<!-- 1(a)-1：电路交换 -->
+<template data-key="1a-circuit" data-question="1a" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
 <div class="original-text" data-original-question="1a">
 <p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
 <p class="source-heading">(a) Circuit switching versus packet switching [6 points]</p>
 <div class="question-copy">
-<p class="source-context">A campus gateway has a 10 Mbps bottleneck link shared by several users. Each user alternates between active and inactive periods. An active user sends at 2 Mbps; an inactive user sends nothing. At any given instant, each user is independently active with probability p = 0.20. With circuit switching, 2 Mbps is reserved for every admitted user throughout the session. With packet switching, users share the link and no fixed bandwidth is reserved for an individual user. In parts (a) and (b), use a bufferless model: overload occurs when the instantaneous offered rate is greater than the link capacity.</p>
-<p class="source-question">Determine (i) the maximum number of users that can be admitted with circuit switching and (ii) the maximum number of users that can be active at the same time with packet switching without overload. Explain why packet switching can support more bursty users than circuit switching. State one drawback of this statistical sharing.</p></div></div>
+<p class="source-context">A 10 Mbps bottleneck link serves users who each require 2 Mbps while active. Circuit switching reserves 2 Mbps for every admitted user throughout the session.</p>
+<p class="source-question">Determine the maximum number of users that can be admitted with circuit switching.</p>
+</div></div>
 <div class="body-content">
-<div class="reading-group" data-step="1">
-<div class="teaching-split">
-<section>
-<h2 class="object-heading">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><span>Circuit switching</span></h2>
+<div class="reading-group">
+<h2 class="object-heading"><svg class="obj-icon" viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><span>Five dedicated reservations fill the link</span></h2>
 <div class="circuit-users">
-<div class="user-lane">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U1</b><span class="dedicated-line">2 Mbps reserved</span></div>
-<div class="user-lane">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U2</b><span class="dedicated-line">2 Mbps reserved</span></div>
-<div class="user-lane">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U3</b><span class="dedicated-line">2 Mbps reserved</span></div>
-<div class="user-lane">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U4</b><span class="dedicated-line">2 Mbps reserved</span></div>
-<div class="user-lane">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U5</b><span class="dedicated-line">2 Mbps reserved</span></div></div>
-<div class="eq">10 Mbps / (2 Mbps/user) = <strong>5 admitted users</strong></div>
-<p class="explain">A reservation belongs to its user for the entire session. Silence does not release it.</p></section>
-<section>
-<h2 class="object-heading">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>Packet switching</span></h2>
-<div class="sender-and-counts">
-<div class="sender-object">
-<img class="teaching-scene" src="asset/teaching-sender-v2.png" alt="A user sends data packets from a laptop">
-<p class="scene-caption">Each active user<br>sends packets</p></div>
-<div class="active-users">
-<div class="user-packet ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U1</b><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>2 Mbps</b></span></div>
-<div class="user-packet ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U2</b><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>2 Mbps</b></span></div>
-<div class="user-packet ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U3</b><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>2 Mbps</b></span></div>
-<div class="user-packet ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U4</b><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>2 Mbps</b></span></div>
-<div class="user-packet ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U5</b><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>2 Mbps</b></span></div>
-<div class="user-packet overload">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U6</b><span class="packet-token violet">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>excess</b></span></div></div></div>
-<div class="shared-link">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><b>One shared 10 Mbps link</b><span>Five active users fill it; a sixth offers excess traffic.</span></div>
-<div class="eq">5 × 2 = 10 Mbps; 6 × 2 = 12 Mbps</div>
-<p class="explain">Idle users send no packets and reserve no bandwidth. More than five users can be admitted. At most five may be active simultaneously without overload; six or more cause excess traffic.</p></section></div></div>
-<div class="reading-group" data-step="2">
-<p class="answer-line">5 admitted circuit users; 5 simultaneously active packet users. In this bufferless model, simultaneous overload loses excess traffic and offers no dedicated per-user guarantee.</p></div></div>
-</template>
-<!-- 页面：1b-mean；正文保持英文，原题位于页面顶部。 -->
-<template data-key="1b-mean" data-question="1b" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
-<div class="original-text" data-original-question="1b">
-<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
-<p class="source-heading">(b) Packet switching: user admission and link capacity [12 points]</p>
-<div class="question-copy">
-<p class="source-question">Assume N = 10 users are admitted with packet switching. Compute the mean aggregate offered rate and the exact overload probability. The required overload probability is at most 1%. Determine whether an 11th user can be admitted on the same 10 Mbps link, and find the largest admissible N. If all 11 users must be supported, find the minimum link capacity that satisfies the 1% requirement. Explain why the mean offered rate alone is not sufficient for this decision.</p></div></div>
-<div class="body-content">
-<div class="reading-group" data-step="1">
-<div class="causal-flow">
-<div class="object ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><strong>N admitted users</strong><span>Each independently active with probability 0.20</span></div>
-<div class="relation"><span>count active users</span><b aria-hidden="true">→</b></div>
-<div class="object ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="user"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><strong>X active users</strong><span>Each sends packets at 2 Mbps</span></div>
-<div class="relation"><span>compare demand with capacity</span><b aria-hidden="true">→</b></div>
-<div class="object violet">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><strong>10 Mbps capacity</strong><span>Overload: 2X > 10, so X ≥ 6</span></div></div>
-<div class="eq">For N = 10: mean offered rate = 10 × 0.20 × 2 Mbps = <strong>4 Mbps</strong></div></div>
-<div class="reading-group" data-step="2">
-<figure class="distribution">
-<div class="prob-bars">
-<div class="prob-col " data-probability="0.10737418240000006" style="--probability:0.10737418240000006"><span class="prob-value">10.7%</span><i aria-label="P(X=0)=0.10737418240000006"></i><b>0</b></div>
-<div class="prob-col " data-probability="0.2684354560000001" style="--probability:0.2684354560000001"><span class="prob-value">26.8%</span><i aria-label="P(X=1)=0.2684354560000001"></i><b>1</b></div>
-<div class="prob-col " data-probability="0.3019898880000002" style="--probability:0.3019898880000002"><span class="prob-value">30.2%</span><i aria-label="P(X=2)=0.3019898880000002"></i><b>2</b></div>
-<div class="prob-col " data-probability="0.2013265920000001" style="--probability:0.2013265920000001"><span class="prob-value">20.1%</span><i aria-label="P(X=3)=0.2013265920000001"></i><b>3</b></div>
-<div class="prob-col " data-probability="0.08808038400000005" style="--probability:0.08808038400000005"><span class="prob-value">8.8%</span><i aria-label="P(X=4)=0.08808038400000005"></i><b>4</b></div>
-<div class="prob-col " data-probability="0.02642411520000001" style="--probability:0.02642411520000001"><span class="prob-value">2.6%</span><i aria-label="P(X=5)=0.02642411520000001"></i><b>5</b></div>
-<div class="prob-col tail" data-probability="0.005505024000000003" style="--probability:0.005505024000000003"><span class="prob-value">0.551%</span><i aria-label="P(X=6)=0.005505024000000003"></i><b>6</b></div>
-<div class="prob-col tail" data-probability="0.0007864320000000004" style="--probability:0.0007864320000000004"><span class="prob-value">0.079%</span><i aria-label="P(X=7)=0.0007864320000000004"></i><b>7</b></div>
-<div class="prob-col tail" data-probability="0.00007372800000000005" style="--probability:0.00007372800000000005"><span class="prob-value">0.007%</span><i aria-label="P(X=8)=0.00007372800000000005"></i><b>8</b></div>
-<div class="prob-col tail" data-probability="0.000004096000000000002" style="--probability:0.000004096000000000002"><span class="prob-value">&lt;0.001%</span><i aria-label="P(X=9)=0.000004096000000000002"></i><b>9</b></div>
-<div class="prob-col tail" data-probability="1.0240000000000006e-7" style="--probability:1.0240000000000006e-7"><span class="prob-value">&lt;0.001%</span><i aria-label="P(X=10)=1.0240000000000006e-7"></i><b>10</b></div></div><figcaption>Number X of active users. Bar heights use exact binomial probabilities; labels are rounded. Highlighted bars overload 10 Mbps.</figcaption></figure></div>
-<div class="reading-group" data-step="3">
-<div class="math">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>≥</mo><mn>6</mn><mo>)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>6</mn></mrow><mn>10</mn></munderover><mrow><mo>(</mo><mfrac linethickness="0"><mn>10</mn><mi>k</mi></mfrac><mo>)</mo></mrow><msup><mrow><mo>(</mo><mn>0.2</mn><mo>)</mo></mrow><mi>k</mi></msup><msup><mrow><mo>(</mo><mn>0.8</mn><mo>)</mo></mrow><mrow><mn>10</mn><mo>−</mo><mi>k</mi></mrow></msup><mo>=</mo><mn>0.0063693824</mn><mo>≈</mo><mn>0.6369</mn><mo>%</mo></mrow></math></div>
-<p class="explain">X ~ Binomial(N, 0.20). The combination counts which k users are active; 0.2ᵏ × 0.8ᴺ⁻ᵏ gives the probability of that particular active/idle pattern. Add every overloaded case.</p></div>
-<div class="reading-group" data-step="4">
-<p class="answer-line">The average is below capacity, but admission is tested against the overload probability, not the average.</p></div></div>
-</template>
-<!-- 页面：1b-admit；正文保持英文，原题位于页面顶部。 -->
-<template data-key="1b-admit" data-question="1b" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
-<div class="original-text" data-original-question="1b">
-<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
-<p class="source-heading">(b) Packet switching: user admission and link capacity [12 points]</p>
-<div class="question-copy">
-<p class="source-question">Assume N = 10 users are admitted with packet switching. Compute the mean aggregate offered rate and the exact overload probability. The required overload probability is at most 1%. Determine whether an 11th user can be admitted on the same 10 Mbps link, and find the largest admissible N. If all 11 users must be supported, find the minimum link capacity that satisfies the 1% requirement. Explain why the mean offered rate alone is not sufficient for this decision.</p></div></div>
-<div class="body-content">
-<div class="reading-group admission-calculation" data-step="1">
-<table class="admission-table">
-<thead>
-<tr><th>Users N</th><th>Overload on 10 Mbps</th><th>1% requirement</th></tr></thead>
-<tbody>
-<tr><td>10</td><td>0.0063693824 ≈ 0.6369%</td><td>Pass</td></tr>
-<tr><td>11</td><td>0.01165420544 ≈ 1.1654%</td><td>Fail</td></tr></tbody></table>
-<div class="math">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>≥</mo><mn>6</mn><mo>)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>6</mn></mrow><mn>11</mn></munderover><mrow><mo>(</mo><mfrac linethickness="0"><mn>11</mn><mi>k</mi></mfrac><mo>)</mo></mrow><msup><mrow><mo>(</mo><mn>0.2</mn><mo>)</mo></mrow><mi>k</mi></msup><msup><mrow><mo>(</mo><mn>0.8</mn><mo>)</mo></mrow><mrow><mn>11</mn><mo>−</mo><mi>k</mi></mrow></msup><mo>=</mo><mn>0.01165420544</mn><mo>≈</mo><mn>1.1654</mn><mo>%</mo></mrow></math></div>
-<p>At 10 Mbps, six active users overload the link. Adding users cannot reduce this probability, so the largest admissible N is <strong>10</strong>.</p></div>
-<div class="reading-group" data-step="2">
-<div class="capacity-working">
-<div>
-<div class="threshold-lanes">
-<div><b>Below 12 Mbps</b><span>6 active × 2 Mbps = 12 Mbps: still overloaded.</span></div>
-<div><b>At 12 Mbps</b><span>6 active users fit; overload starts at 7.</span></div></div>
-<p>The 2 Mbps demand of one additional active user must fit before the overload threshold changes.</p></div>
-<div>
-<div class="eq">11 users, 12 Mbps: overload when X ≥ 7</div>
-<div class="math">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>≥</mo><mn>7</mn><mo>)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>7</mn></mrow><mn>11</mn></munderover><mrow><mo>(</mo><mfrac linethickness="0"><mn>11</mn><mi>k</mi></mfrac><mo>)</mo></mrow><msup><mrow><mo>(</mo><mn>0.2</mn><mo>)</mo></mrow><mi>k</mi></msup><msup><mrow><mo>(</mo><mn>0.8</mn><mo>)</mo></mrow><mrow><mn>11</mn><mo>−</mo><mi>k</mi></mrow></msup><mo>=</mo><mn>0.0019653632</mn><mo>≈</mo><mn>0.1965</mn><mo>%</mo></mrow></math></div>
-<p>Below 1%. Any capacity below 12 Mbps still fails with six active users, making <strong>12 Mbps the minimum</strong>.</p></div></div></div>
-<div class="reading-group" data-step="3">
-<p class="answer-line">Largest admissible N = 10. Minimum capacity for 11 users = 12 Mbps.</p></div></div>
-</template>
-<!-- 页面：1c-model；正文保持英文，原题位于页面顶部。 -->
-<template data-key="1c-model" data-question="1c" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
-<div class="original-text" data-original-question="1c">
-<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
-<p class="source-heading">(c) Message switching versus packet switching [12 points]</p>
-<div class="question-copy">
-<p class="source-question">Consider a separate path from A to B through two store-and-forward routers, R1 and R2. There is no background traffic. Each router takes 1 ms to process each received message or packet, and each link has a 10 ms propagation delay. The link rates are shown in the figure. A 6-Mbit application payload is sent from A to B.</p>
-<p class="source-question">With message switching, the entire 6-Mbit payload is sent as one message with a single 10-Kbit header. With packet switching, the payload is split into six 1-Mbit packets; each packet has its own 10-Kbit header, and A sends the six packets back-to-back. Assume FIFO service and store-and-forward operation at both routers.</p>
-<p class="source-question">Compute the file completion time for message switching and packet switching. For packet switching, show the timing of P1, P2, and P6 and identify the bottleneck link. Explain why packet switching can finish earlier even though it sends more header bits. State one cost of using smaller packets.</p></div></div>
-<div class="body-content">
-<div class="reading-group" data-step="1">
-<div class="causal-flow">
-<div class="object ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>A</strong><span>Source</span></div>
-<div class="relation"><span>10 Mbps; 10 ms</span><b aria-hidden="true">→</b></div>
-<div class="object ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="router"><rect x="6" y="18" width="52" height="32" rx="5"/><path d="M17 27h12m-4-4 4 4-4 4M47 41H35m4-4-4 4 4 4M13 56h38"/></svg><strong>R1</strong><span>Receive all; process 1 ms</span></div>
-<div class="relation"><span>5 Mbps; 10 ms</span><b aria-hidden="true">→</b></div>
-<div class="object ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="router"><rect x="6" y="18" width="52" height="32" rx="5"/><path d="M17 27h12m-4-4 4 4-4 4M47 41H35m4-4-4 4 4 4M13 56h38"/></svg><strong>R2</strong><span>Receive all; process 1 ms</span></div>
-<div class="relation"><span>10 Mbps; 10 ms</span><b aria-hidden="true">→</b></div>
-<div class="object ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="browser"><rect x="6" y="9" width="52" height="42" rx="4"/><path d="M6 21h52M15 15h1m7 0h1m7 0h1M23 57h18"/></svg><strong>B</strong><span>Destination</span></div></div></div>
-<div class="reading-group" data-step="2">
-<div class="teaching-split">
-<section>
-<h2 class="object-heading">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>One complete message</span></h2>
-<div class="message-token">6 Mbit payload + 10 Kbit header = 6.01 Mbit</div>
-<p class="explain">R1 cannot start forwarding until the entire message has arrived and been processed. R2 has the same rule, so the three transmissions do not overlap.</p>
-<div class="eq">T = 0.601 + 1.202 + 0.601 s<br>+ 3 × 0.010 s + 2 × 0.001 s<br>= <strong>2.436 s</strong></div></section>
-<section>
-<h2 class="object-heading">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><span>Six independently forwardable packets</span></h2>
-<div class="packet-sequence"><span class="packet-token violet">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P1</b></span><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P2</b></span><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P3</b></span><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P4</b></span><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P5</b></span><span class="packet-token ">
-<svg class="obj-icon " viewBox="0 0 64 64" role="img" aria-label="packet"><rect x="8" y="16" width="48" height="32" rx="3"/><path d="M20 16v32M29 26h17M29 36h17"/></svg><b>P6</b></span></div>
-<p class="explain">Each packet carries 1 Mbit payload + 10 Kbit header = 1.01 Mbit. Once P1 is complete at R1, R1 can forward it while A sends later packets.</p>
-<div class="eq">Transmission per packet: <strong>101 / 202 / 101 ms</strong></div>
-<p class="explain">The 5 Mbps middle link needs twice as long per packet, making it the bottleneck.</p></section></div></div>
-<div class="reading-group" data-step="3">
-<p class="answer-line">Pipelining overlaps work on different links. Smaller packets also repeat headers and per-packet processing.</p></div></div>
-</template>
-<!-- 页面：1c-time；正文保持英文，原题位于页面顶部。 -->
-<template data-key="1c-time" data-question="1c" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
-<div class="original-text" data-original-question="1c">
-<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
-<p class="source-heading">(c) Message switching versus packet switching [12 points]</p>
-<div class="question-copy">
-<p class="source-question">Compute the file completion time for message switching and packet switching. For packet switching, show the timing of P1, P2, and P6 and identify the bottleneck link. Explain why packet switching can finish earlier even though it sends more header bits. State one cost of using smaller packets.</p></div></div>
-<div class="body-content">
-<div class="reading-group" data-step="1">
-<div class="packet-timeline">
-<div class="time-ruler"><span style="left:0%">0</span><span style="left:25%">400</span><span style="left:50%">800</span><span style="left:75%">1200</span><span style="left:100%">1600</span><small>ms</small></div>
-<div class="time-lane"><b>A → R1</b>
-<div class="time-track"><span class="time-packet p1" style="left:0%;width:6.3125%">P1</span><span class="time-packet p2" style="left:6.3125%;width:6.3125%">P2</span><span class="time-packet p3" style="left:12.625%;width:6.3125%">P3</span><span class="time-packet p4" style="left:18.9375%;width:6.3125%">P4</span><span class="time-packet p5" style="left:25.25%;width:6.3125%">P5</span><span class="time-packet p6" style="left:31.5625%;width:6.3125%">P6</span></div></div>
-<div class="time-lane"><b>R1 → R2</b>
-<div class="time-track"><span class="time-packet p1" style="left:7.000000000000001%;width:12.625%">P1</span><span class="time-packet p2" style="left:19.625%;width:12.625%">P2</span><span class="time-packet p3" style="left:32.25%;width:12.625%">P3</span><span class="time-packet p4" style="left:44.875%;width:12.625%">P4</span><span class="time-packet p5" style="left:57.49999999999999%;width:12.625%">P5</span><span class="time-packet p6" style="left:70.125%;width:12.625%">P6</span></div></div>
-<div class="time-lane"><b>R2 → B</b>
-<div class="time-track"><span class="time-packet p1" style="left:20.3125%;width:6.3125%">P1</span><span class="time-packet p2" style="left:32.9375%;width:6.3125%">P2</span><span class="time-packet p3" style="left:45.5625%;width:6.3125%">P3</span><span class="time-packet p4" style="left:58.1875%;width:6.3125%">P4</span><span class="time-packet p5" style="left:70.8125%;width:6.3125%">P5</span><span class="time-packet p6" style="left:83.4375%;width:6.3125%">P6</span></div></div></div>
-<p class="explain"><strong>Colored bars show transmission intervals only.</strong> They exclude propagation and router processing. <strong>P1:</strong> 101 ms sending + 10 ms propagation + 1 ms processing makes R1 ready at 112 ms. Its next send ends at 314 ms. At R2: 314 + 10 + 1 = 325 ms; B receives the last bit at 426 + 10 = 436 ms.</p></div>
-<div class="reading-group" data-step="2">
-<p class="scene-caption">All table times are in ms from A starting P1. Ready includes last-bit arrival and router processing.</p>
-<table class="timing">
-<thead>
-<tr><th>Packet</th><th>A sends</th><th>Ready R1</th><th>R1 sends</th><th>Ready R2</th><th>R2 sends</th><th>B receives</th></tr></thead>
-<tbody>
-<tr><td>P1</td><td>0–101</td><td>112</td><td>112–314</td><td>325</td><td>325–426</td><td>436</td></tr>
-<tr><td>P2</td><td>101–202</td><td>213</td><td>314–516</td><td>527</td><td>527–628</td><td>638</td></tr>
-<tr><td>P6</td><td>505–606</td><td>617</td><td>1122–1324</td><td>1335</td><td>1335–1436</td><td>1446</td></tr></tbody></table></div>
-<div class="reading-group" data-step="3">
-<p class="explain"><strong>P2 waits:</strong> it is ready at 213 ms, but R1–R2 remains busy with P1 until 314 ms. After P1, completions are spaced by the bottleneck’s 202 ms.</p>
-<p class="answer-line">Last packet: 436 ms + 5 × 202 ms = 1446 ms = 1.446 s.</p></div></div>
+<div class="user-lane"><svg class="obj-icon" viewBox="0 0 64 64"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U1</b><span class="dedicated-line">2 Mbps reserved</span></div>
+<div class="user-lane"><svg class="obj-icon" viewBox="0 0 64 64"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U2</b><span class="dedicated-line">2 Mbps reserved</span></div>
+<div class="user-lane"><svg class="obj-icon" viewBox="0 0 64 64"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U3</b><span class="dedicated-line">2 Mbps reserved</span></div>
+<div class="user-lane"><svg class="obj-icon" viewBox="0 0 64 64"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U4</b><span class="dedicated-line">2 Mbps reserved</span></div>
+<div class="user-lane"><svg class="obj-icon" viewBox="0 0 64 64"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><b>U5</b><span class="dedicated-line">2 Mbps reserved</span></div>
+</div></div>
+<div class="reading-group"><div class="eq">10 Mbps / (2 Mbps per user) = <strong>5 admitted users</strong></div><p class="explain">The reservation remains assigned even when its user is inactive.</p></div>
+<div class="reading-group"><p class="answer-line">Circuit switching admits at most 5 users.</p></div>
+</div>
 </template>
 
-<!-- 本地文件加载桥接：请保留此段。它让双击首页也能读取成员页面，无需服务器。 -->
+<!-- 1(a)-2：分组交换 -->
+<template data-key="1a-packet" data-question="1a" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1a">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
+<p class="source-heading">(a) Packet switching and statistical sharing</p>
+<div class="question-copy">
+<p class="source-context">With packet switching, active users share the 10 Mbps link and no bandwidth is reserved for an individual user. The model is bufferless, so offered traffic above 10 Mbps is lost.</p>
+<p class="source-question">Find the largest simultaneous active-user count without overload, explain why more bursty users can be admitted, and state one drawback.</p>
+</div></div>
+<div class="body-content">
+<div class="reading-group">
+<div class="sender-and-counts">
+<div class="sender-object"><img class="teaching-scene" src="asset/teaching-sender-v2.png" alt="A user sends data packets from a laptop"><p class="scene-caption">Only active users send packets</p></div>
+<div class="active-users">
+<div class="user-packet"><b>U1</b><span class="packet-token">2 Mbps</span></div><div class="user-packet"><b>U2</b><span class="packet-token">2 Mbps</span></div>
+<div class="user-packet"><b>U3</b><span class="packet-token">2 Mbps</span></div><div class="user-packet"><b>U4</b><span class="packet-token">2 Mbps</span></div>
+<div class="user-packet"><b>U5</b><span class="packet-token">2 Mbps</span></div><div class="user-packet overload"><b>U6</b><span class="packet-token violet">excess</span></div>
+</div></div>
+<div class="shared-link"><svg class="obj-icon" viewBox="0 0 64 64" role="img" aria-label="link"><path d="M6 32h52M6 23v18M58 23v18M20 25l7 7-7 7M37 25l7 7-7 7"/></svg><b>One shared 10 Mbps link</b></div>
+</div>
+<div class="reading-group"><div class="eq">5 × 2 = 10 Mbps; 6 × 2 = 12 Mbps</div><p class="explain">Idle users reserve nothing, so the network may admit more than five bursty users. At most five may be active together without overload.</p></div>
+<div class="reading-group"><p class="answer-line">Its drawback is that simultaneous bursts can overload the link and cause packet loss in this bufferless model; unlike circuit switching, per-user bandwidth and service are not guaranteed</p></div>
+</div>
+</template>
+
+<!-- 1(b)-1：随机模型与平均速率 -->
+<template data-key="1b-model" data-question="1b" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1b">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p>
+<p class="source-heading">(b) Packet switching: offered load model</p>
+<div class="question-copy"><p class="source-question">Assume N = 10 admitted users. Each user is independently active with probability 0.20 and sends at 2 Mbps while active. Compute the mean aggregate offered rate and identify the overload event on a 10 Mbps link.</p></div>
+</div>
+<div class="body-content">
+<div class="reading-group">
+<div class="causal-flow">
+<div class="object"><svg class="obj-icon" viewBox="0 0 64 64"><circle cx="32" cy="16" r="10"/><path d="M12 56v-7c0-13 9-20 20-20s20 7 20 20v7"/></svg><strong>10 admitted users</strong><span>active independently with p = 0.20</span></div>
+<div class="relation"><span>count active users</span><b aria-hidden="true">→</b></div>
+<div class="object"><strong>X active users</strong><span>X ~ Binomial(10, 0.20)</span></div>
+<div class="relation"><span>compare demand</span><b aria-hidden="true">→</b></div>
+<div class="object violet"><strong>10 Mbps link</strong><span>overload when 2X &gt; 10, so X ≥ 6</span></div>
+</div>
+<div class="eq">Mean offered rate = 10 × 0.20 × 2 Mbps = <strong>4 Mbps</strong></div>
+</div>
+<div class="reading-group">
+<figure class="distribution"><div class="prob-bars">
+<div class="prob-col" style="--probability:.107374"><span class="prob-value">10.7%</span><i></i><b>0</b></div><div class="prob-col" style="--probability:.268435"><span class="prob-value">26.8%</span><i></i><b>1</b></div><div class="prob-col" style="--probability:.301990"><span class="prob-value">30.2%</span><i></i><b>2</b></div><div class="prob-col" style="--probability:.201327"><span class="prob-value">20.1%</span><i></i><b>3</b></div><div class="prob-col" style="--probability:.088080"><span class="prob-value">8.8%</span><i></i><b>4</b></div><div class="prob-col" style="--probability:.026424"><span class="prob-value">2.6%</span><i></i><b>5</b></div><div class="prob-col tail" style="--probability:.005505"><span class="prob-value">0.551%</span><i></i><b>6</b></div><div class="prob-col tail" style="--probability:.000786"><span class="prob-value">0.079%</span><i></i><b>7</b></div><div class="prob-col tail" style="--probability:.000074"><span class="prob-value">0.007%</span><i></i><b>8</b></div><div class="prob-col tail" style="--probability:.000004"><span class="prob-value">&lt;0.001%</span><i></i><b>9</b></div><div class="prob-col tail" style="--probability:.0000001"><span class="prob-value">&lt;0.001%</span><i></i><b>10</b></div>
+</div><figcaption>Distribution of active users. Violet bars are overload states.</figcaption></figure>
+</div>
+<div class="reading-group"><p class="answer-line">The 4 Mbps mean does not capture the probability of six or more simultaneous senders.</p></div>
+</div>
+</template>
+
+<!-- 1(b)-2：精确过载概率与准入 -->
+<template data-key="1b-admission" data-question="1b" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1b">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p><p class="source-heading">(b) Exact overload probability and admission</p>
+<div class="question-copy"><p class="source-question">The overload probability must be at most 1%. Determine whether an 11th user can be admitted on the same 10 Mbps link and find the largest admissible N.</p></div>
+</div>
+<div class="body-content">
+<div class="reading-group"><h2>N = 10</h2><div class="math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>≥</mo><mn>6</mn><mo>)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>6</mn></mrow><mn>10</mn></munderover><mrow><mo>(</mo><mfrac linethickness="0"><mn>10</mn><mi>k</mi></mfrac><mo>)</mo></mrow><msup><mn>0.2</mn><mi>k</mi></msup><msup><mn>0.8</mn><mrow><mn>10</mn><mo>−</mo><mi>k</mi></mrow></msup><mo>=</mo><mn>0.0063693824</mn><mo>≈</mo><mn>0.6369</mn><mo>%</mo></mrow></math></div></div>
+<div class="reading-group"><h2>N = 11</h2><div class="math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>≥</mo><mn>6</mn><mo>)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>6</mn></mrow><mn>11</mn></munderover><mrow><mo>(</mo><mfrac linethickness="0"><mn>11</mn><mi>k</mi></mfrac><mo>)</mo></mrow><msup><mn>0.2</mn><mi>k</mi></msup><msup><mn>0.8</mn><mrow><mn>11</mn><mo>−</mo><mi>k</mi></mrow></msup><mo>=</mo><mn>0.01165420544</mn><mo>≈</mo><mn>1.1654</mn><mo>%</mo></mrow></math></div></div>
+<div class="reading-group"><table class="admission-table"><thead><tr><th>Users N</th><th>Overload on 10 Mbps</th><th>1% requirement</th></tr></thead><tbody><tr><td>10</td><td>0.6369%</td><td>Pass</td></tr><tr><td>11</td><td>1.1654%</td><td>Fail</td></tr></tbody></table></div>
+<div class="reading-group"><p class="answer-line">The 11th user fails the requirement. The largest admissible N is 10.</p></div>
+</div>
+</template>
+
+<!-- 1(b)-3：容量提升 -->
+<template data-key="1b-capacity" data-question="1b" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1b">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p><p class="source-heading">(b) Minimum capacity for 11 users</p>
+<div class="question-copy"><p class="source-question">If all 11 users must be supported, find the minimum link capacity that satisfies the 1% overload requirement.</p></div>
+</div>
+<div class="body-content">
+<div class="reading-group"><div class="capacity-working">
+<div><div class="threshold-lanes"><div><b>Below 12 Mbps</b><span>Six active users still overload the link.</span></div><div><b>At 12 Mbps</b><span>Six active users fit, so overload starts at seven.</span></div></div><p>The threshold changes only after another full 2 Mbps user demand fits.</p></div>
+<div><div class="eq">11 users, 12 Mbps: overload when X ≥ 7</div><div class="math"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mi>P</mi><mo>(</mo><mi>X</mi><mo>≥</mo><mn>7</mn><mo>)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>7</mn></mrow><mn>11</mn></munderover><mrow><mo>(</mo><mfrac linethickness="0"><mn>11</mn><mi>k</mi></mfrac><mo>)</mo></mrow><msup><mn>0.2</mn><mi>k</mi></msup><msup><mn>0.8</mn><mrow><mn>11</mn><mo>−</mo><mi>k</mi></mrow></msup><mo>=</mo><mn>0.0019653632</mn><mo>≈</mo><mn>0.1965</mn><mo>%</mo></mrow></math></div><p>0.1965% is below the 1% limit.</p></div>
+</div></div>
+<div class="reading-group"><p class="answer-line">Minimum capacity for 11 users = 12 Mbps.</p></div>
+</div>
+</template>
+
+<!-- 1(c)-1：路径与转发单位 -->
+<template data-key="1c-model" data-question="1c" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1c">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p><p class="source-heading">(c) Message switching versus packet switching [12 points]</p>
+<div class="question-copy"><p class="source-context">A sends a 6 Mbit application payload to B through store-and-forward routers R1 and R2. Each router processes a received unit for 1 ms, and every link has a 10 ms propagation delay.</p><p class="source-question">Compare one 6.01 Mbit message with six 1.01 Mbit packets on the 10, 5, and 10 Mbps links.</p></div>
+</div>
+<div class="body-content">
+<div class="reading-group"><img class="store-forward-path" src="asset/store-and-forward-path.png" alt="Store-and-forward path from A through R1 and R2 to B"></div>
+<div class="reading-group"><div class="teaching-split">
+<section><h2>Message switching</h2><div class="message-token">6 Mbit payload + 10 Kbit header = 6.01 Mbit</div><p class="explain">A router waits for the complete message before forwarding it.</p></section>
+<section><h2>Packet switching</h2><div class="packet-sequence"><span class="packet-token violet">P1</span><span class="packet-token">P2</span><span class="packet-token">P3</span><span class="packet-token">P4</span><span class="packet-token">P5</span><span class="packet-token">P6</span></div><p class="explain">Each packet carries a 1 Mbit payload and its own 10 Kbit header.</p></section>
+</div></div>
+<div class="reading-group"><p class="answer-line">The 5 Mbps middle link is the bottleneck for both approaches.</p></div>
+</div>
+</template>
+
+<!-- 1(c)-2：消息时延与流水线 -->
+<template data-key="1c-pipeline" data-question="1c" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1c">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p><p class="source-heading">(c) Completion time and pipelining</p>
+<div class="question-copy"><p class="source-question">Compute the message-switching completion time and explain why packet switching can finish earlier even though it sends more header bits.</p></div>
+</div>
+<div class="body-content">
+<div class="reading-group"><div class="teaching-split">
+<section><h2>One complete message</h2><p class="explain">The three transmissions cannot overlap because each router must receive all 6.01 Mbit first.</p><div class="eq">T = 0.601 + 1.202 + 0.601 s<br>+ 3 × 0.010 s + 2 × 0.001 s<br>= <strong>2.436 s</strong></div></section>
+<section><h2>Six packets in a pipeline</h2><p class="explain">Per-packet transmission times on the three links:</p><div class="eq"><strong>101 ms / 202 ms / 101 ms</strong></div><p class="explain">Once P1 reaches R1, R1 forwards it while A sends later packets. Work overlaps across links.</p></section>
+</div></div>
+<div class="reading-group"><p class="answer-line">Pipelining outweighs the repeated headers, but smaller packets add header and per-packet processing overhead.</p></div>
+</div>
+</template>
+
+<!-- 1(c)-3：分组时间线 -->
+<template data-key="1c-time" data-question="1c" data-owner="Lin Fengyan" data-source="Homework 1 and group consensus">
+<div class="original-text" data-original-question="1c">
+<p class="source-major-heading">Problem 1. Circuit, Packet, and Message Switching (30 points)</p><p class="source-heading">(c) Packet timing on the bottleneck path</p>
+<div class="question-copy"><p class="source-question">Show the timing of P1, P2, and P6, then compute when the last packet reaches B.</p></div>
+</div>
+<div class="body-content">
+<div class="reading-group"><div class="packet-timeline">
+<div class="time-ruler"><span style="left:0%">0</span><span style="left:25%">400</span><span style="left:50%">800</span><span style="left:75%">1200</span><span style="left:100%">1600</span><small>ms</small></div>
+<div class="time-lane"><b>A → R1</b><div class="time-track"><span class="time-packet p1" style="left:0%;width:6.3125%">P1</span><span class="time-packet p2" style="left:6.3125%;width:6.3125%">P2</span><span class="time-packet p3" style="left:12.625%;width:6.3125%">P3</span><span class="time-packet p4" style="left:18.9375%;width:6.3125%">P4</span><span class="time-packet p5" style="left:25.25%;width:6.3125%">P5</span><span class="time-packet p6" style="left:31.5625%;width:6.3125%">P6</span></div></div>
+<div class="time-lane"><b>R1 → R2</b><div class="time-track"><span class="time-packet p1" style="left:7%;width:12.625%">P1</span><span class="time-packet p2" style="left:19.625%;width:12.625%">P2</span><span class="time-packet p3" style="left:32.25%;width:12.625%">P3</span><span class="time-packet p4" style="left:44.875%;width:12.625%">P4</span><span class="time-packet p5" style="left:57.5%;width:12.625%">P5</span><span class="time-packet p6" style="left:70.125%;width:12.625%">P6</span></div></div>
+<div class="time-lane"><b>R2 → B</b><div class="time-track"><span class="time-packet p1" style="left:20.3125%;width:6.3125%">P1</span><span class="time-packet p2" style="left:32.9375%;width:6.3125%">P2</span><span class="time-packet p3" style="left:45.5625%;width:6.3125%">P3</span><span class="time-packet p4" style="left:58.1875%;width:6.3125%">P4</span><span class="time-packet p5" style="left:70.8125%;width:6.3125%">P5</span><span class="time-packet p6" style="left:83.4375%;width:6.3125%">P6</span></div></div>
+</div></div>
+<div class="reading-group"><table class="timing"><thead><tr><th>Packet</th><th>A sends</th><th>Ready R1</th><th>R1 sends</th><th>Ready R2</th><th>R2 sends</th><th>B receives</th></tr></thead><tbody><tr><td>P1</td><td>0–101</td><td>112</td><td>112–314</td><td>325</td><td>325–426</td><td>436</td></tr><tr><td>P2</td><td>101–202</td><td>213</td><td>314–516</td><td>527</td><td>527–628</td><td>638</td></tr><tr><td>P6</td><td>505–606</td><td>617</td><td>1122–1324</td><td>1335</td><td>1335–1436</td><td>1446</td></tr></tbody></table></div>
+<div class="reading-group"><p class="answer-line">Last packet: 436 ms + 5 × 202 ms = 1446 ms = 1.446 s.</p></div>
+</div>
+</template>
+
+<!-- 本地文件加载桥接：请保留。 -->
 <script>
 parent.postMessage({type:'comp5621-pages', html:[...document.querySelectorAll('template')].map(t=>t.outerHTML).join('')}, '*');
 </script>
